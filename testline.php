@@ -19,14 +19,14 @@ if ( sizeof($request_array['events']) > 0 )
   {
    if( $event['message']['type'] == 'text' )
    {
-     if ('text'=='on')
+     if ('message'=='on')
      {
       $text = $event['message']['text'];
       $reply_message = 'เปิดหลอดไฟ';
      }
    }
    else
-   if ('text'=='off')
+   if ('message'=='off')
    {
     $text = $event['message']['text'];
     $reply_message = 'ปิดหลอดไฟ';
