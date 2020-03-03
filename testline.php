@@ -19,18 +19,11 @@ if ( sizeof($request_array['events']) > 0 )
   {
    if( $event['message']['type'] == 'text' )
    {
-     if ('message'=='on')
-     {
-      $text = $event['message']['text'];
-      $reply_message = 'เปิดหลอดไฟ';
-     }
+    $text = $event['message']['text'];
+    $reply_message = 'ระบบได้รับข้อความ ('.$text.') ของคุณแล้ว';
    }
    else
-   if ('message'=='off')
-   {
-    $text = $event['message']['text'];
-    $reply_message = 'ปิดหลอดไฟ';
-   }  
+    $reply_message = 'ระบบได้รับ '.ucfirst($event['message']['type']).' ของคุณแล้ว';
   
   }
   else
