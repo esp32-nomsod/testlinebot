@@ -32,20 +32,26 @@ void onMsghandler(char *topic, uint8_t* msg, unsigned int msglen) {
   msg[msglen] = '\0';
   Serial.println((char *)msg);
   String msgLINE = (char *)msg;
-  if ( msgLINE == "ON" || msgLINE == "On" || msgLINE == "on" ) {
-    send_json("Turn on LED");
-    digitalWrite(16, HIGH);         // LED on
+  if ( msgLINE == "ON" || msgLINE == "On" || msgLINE == "on" || msgLINE == "เปิดไฟ") 
+  {
+     send_json("เปิดไฟแล้วครับ... LED ON");
+     pinMode(16, OUTPUT);
+     digitalWrite(16, LOW);         // LED on
   } 
-  else if ( msgLINE == "OFF" || msgLINE == "Off"  || msgLINE == "off" ) {
-    send_json("Turn off LED");
-    digitalWrite(16, LOW);          // LED off
+  else if ( msgLINE == "OFF" || msgLINE == "Off"  || msgLINE == "off" || msgLINE == "ปิดไฟ")  
+  {
+    send_json("ปิดไฟแล้วครับ... LED OFF");
+    pinMode(16, OUTPUT);
+    digitalWrite(16, HIGH);          // LED off
   }
-  else if ( msgLINE == "RESET" || msgLINE == "Reset"  || msgLINE == "reset" ) {
+  else if ( msgLINE == "RESET" || msgLINE == "Reset"  || msgLINE == "reset" ) 
+  {
     send_json("System Resetting");
     delay(5000);
     ESP.restart();
   }
-  else {
+  else 
+  {
     send_json("Syntax error command");
   }
 }
@@ -84,6 +90,8 @@ void send_json(String data) {
 }
 
 void setup() {
+  
+  pinMode(16, OUTPUT);
   microgear.setEEPROMOffset(3000);
   microgear.on(MESSAGE, onMsghandler);
   microgear.on(CONNECTED, onConnected);
@@ -91,7 +99,6 @@ void setup() {
   Serial.begin(115200);
   Serial.println("Starting...");
 
-  pinMode(16, OUTPUT);
   
   pinMode(16,HIGH);delay(300);
   pinMode(16,LOW);delay(300);
